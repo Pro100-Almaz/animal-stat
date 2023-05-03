@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="navbar navbar-dark bg-dark box-shadow">
+        <div class="container d-flex justify-content-between">
+            <a href="{% url 'welcome' %}" class="navbar-brand d-flex align-items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+            <strong>Album</strong>
+            </a>
+        </div>
+    </div>
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col-md-8 order-md-1">
+              <h4 class="mb-3">Добавление новых данных</h4>
+              <form class="needs-validation" novalidate="">
+                <div class="col-md-6 mb-3">
+                    <label for="year">Год</label>
+                    <input type="number" class="form-control" placeholder="2023" id="year" name="year">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="lastName">Сайга</label>
+                    <input type="text" class="form-control" placeholder="0" id="saiga" name="saige">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="lastName">Красная книга</label>
+                    <input type="text" class="form-control" placeholder="0" id="red_book" name="red_book">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="lastName">Иные</label>
+                    <input type="text" class="form-control" placeholder="0" id="other" name="other">
+                </div>
+
+                <hr class="mb-4">
+                <div class="row d-flex justify-content-between">
+                    <a href="{% url 'crime_number' %}"><button class="btn btn-info btn-lg">Назад</button></a>
+                    <a href="{% url 'crime_number' %}"><button class="btn btn-success btn-lg" type="submit">Добавить</button></a>
+                </div>
+                
+              </form>
+            </div>
+          </div>
+    </div>
+    
+
+    </body>
+    </html>
