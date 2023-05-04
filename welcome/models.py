@@ -6,11 +6,13 @@ class CrimeNumber(models.Model):
     red_book = models.IntegerField()
     others = models.IntegerField()
     total = models.IntegerField()
+    percentage = models.FloatField(max_length=3)
 
     def calculate_total(self):
-        return (self.saiga + self.red_book + self.others)
+        self.total = (int(self.saiga) + int(self.red_book) + int(self.others))
 
 class TakenItems(models.Model):
+    year = models.IntegerField()
     saiga_without_horns = models.IntegerField()
     saiga_with_horns = models.IntegerField()
     saiga_female = models.IntegerField()
@@ -27,3 +29,13 @@ class TakenItems(models.Model):
     falcon_baloban = models.IntegerField()
     sturgeon = models.IntegerField()
     badger = models.IntegerField()
+
+class Location(models.Model):
+    city = models.CharField(max_length=50)
+    region = models.CharField(max_length=500)
+
+class Animal(models.Model):
+    name = models.CharField(max_length=50)
+    number = models.IntegerField()
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+

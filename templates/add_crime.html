@@ -22,28 +22,29 @@
         <div class="row">
             <div class="col-md-8 order-md-1">
               <h4 class="mb-3">Добавление новых данных</h4>
-              <form class="needs-validation" novalidate="">
+              <form method="post">
+                {% csrf_token %}
                 <div class="col-md-6 mb-3">
                     <label for="year">Год</label>
-                    <input type="number" class="form-control" placeholder="2023" id="year" name="year">
+                    <input type="number" class="form-control" placeholder="Например 2023" id="year" name="year">
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="lastName">Сайга</label>
-                    <input type="text" class="form-control" placeholder="0" id="saiga" name="saige">
+                    <input type="text" class="form-control" placeholder="Количество, нап 12" id="saiga" name="saiga">
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="lastName">Красная книга</label>
-                    <input type="text" class="form-control" placeholder="0" id="red_book" name="red_book">
+                    <input type="text" class="form-control" placeholder="Количество, нап 12" id="red_book" name="red_book">
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="lastName">Иные</label>
-                    <input type="text" class="form-control" placeholder="0" id="other" name="other">
+                    <input type="text" class="form-control" placeholder="Количество, нап 12" id="others" name="others">
                 </div>
 
                 <hr class="mb-4">
                 <div class="row d-flex justify-content-between">
-                    <a href="{% url 'crime_number' %}"><button class="btn btn-info btn-lg">Назад</button></a>
-                    <a href="{% url 'crime_number' %}"><button class="btn btn-success btn-lg" type="submit">Добавить</button></a>
+                    <button type="button" class="btn btn-info btn-lg" onclick="window.history.back()">Назад</button>
+                    <a href="{% url 'add_crime' %}"><button class="btn btn-success btn-lg" type="submit">Добавить</button></a>
                 </div>
                 
               </form>

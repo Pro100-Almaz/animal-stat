@@ -32,38 +32,58 @@
 
 
         <h2>Количество уголовных дел</h2>
-        <div class="table-responsive">
-          <table class="table table-striped table-sm">
-            <thead>
-              <tr>
-                <th>Год / Вид животного</th>
-                <th>Сайга</th>
-                <th>Кр.книжные</th>
-                <th>Иные</th>
-                <th>Общий итог</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for record in records %}
+        <form method="post">
+          {% csrf_token %}
+          <div class="table-responsive">
+            <table class="table table-striped table-sm">
+              <thead>
                 <tr>
-                    <td>{{ record.year }}</td>
-                    <td>{{ record.saiga }}</td>
-                    <td>{{ record.red_book }}</td>
-                    <td>{{ record.others }}</td>
-                    <td>{{ record.total }}</td>
+                  <th>#</th>
+                  <th>Год / Вид животного</th>
+                  <th>Сайга</th>
+                  <th>Кр.книжные</th>
+                  <th>Иные</th>
+                  <th>Общий итог</th>
+                  <th>Разница с прош. годом</th>
                 </tr>
-              {% endfor %}
-              <tr class="bg-success">
-                <td><strong>Итог</strong> </td>
-                <td>{{ saiga_total }}</td>
-                <td>{{ red_book_total }}</td>
-                <td>{{ other_total }}</td>
-                <td>{{ total_total }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
+              </thead>
+              
+                <tbody>
+                  {% for record in records %}
+                    <tr>
+                        <td><input type="checkbox" name="data" value="{{ record.year }}"></td>
+                        <td>{{ record.year }}</td>
+                        <td>{{ record.saiga }}</td>
+                        <td>{{ record.red_book }}</td>
+                        <td>{{ record.others }}</td>
+                        <td>{{ record.total }}</td>
+                        {% if record.percentage > 0 %}  
+                          <td class="text-success">{{ record.percentage }}%</td>
+                        {% else %}
+                          <td class="text-danger">{{ record.percentage }}%</td>
+                        {% endif %}
+                    </tr>
+                  {% endfor %}
+                  <tr class="bg-success">
+                    <td><strong>Итог</strong> </td>
+                    <td></td>
+                    <td>{{ saiga_total }}</td>
+                    <td>{{ red_book_total }}</td>
+                    <td>{{ other_total }}</td>
+                    <td>{{ total_total }}</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              
+            </table>
+          </div>
+          <button type="submit" class="btn btn-primary">Сравнить</button>
+        </form>
+        {% if percentage %}
+          Разница между {{ percentage.first_val }} годом и {{ percentage.second_val }} годом {{ percentage.number }}%.
+        {% else %}
+          *Выделите два года для сравнения изменений 
+        {% endif %}
       </main>
 </body>
 </html>
