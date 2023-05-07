@@ -1,0 +1,84 @@
+{% extends 'navigation.html' %}
+{% block content %}
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col-md-8 order-md-1">
+              <h4 class="mb-3">Добавление новых данных</h4>
+              <form method="post">
+                {% csrf_token %}
+                <div class="col-md-6 mb-3">
+                    <label for="year">Год</label>
+                    <input type="number" class="form-control" placeholder="Например 2023" id="year" name="year">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="lastName">Самец с рогами</label>
+                    <input type="text" class="form-control" placeholder="Количество, нап 12" id="saiga_without_horns" name="saiga_without_horns">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="lastName">Самец с отпилиными рогами</label>
+                    <input type="text" class="form-control" placeholder="Количество, нап 12" id="saiga_with_horns" name="saiga_with_horns">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="lastName">Самка</label>
+                    <input type="text" class="form-control" placeholder="Количество, нап 12" id="saiga_female" name="saiga_female">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="lastName">Рога</label>
+                    <input type="text" class="form-control" placeholder="Количество, нап 12" id="horns" name="horns">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="lastName">Сеголеток</label>
+                    <input type="text" class="form-control" placeholder="Количество, нап 12" id="segoltok" name="segoltok">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="lastName">Архар</label>
+                    <input type="text" class="form-control" placeholder="Количество, нап 12" id="arhar" name="arhar">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="lastName">Джейран</label>
+                    <input type="text" class="form-control" placeholder="Количество, нап 12" id="jeiran" name="jeiran">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="lastName">Дрофа</label>
+                    <input type="text" class="form-control" placeholder="Количество, нап 12" id="drofa" name="drofa">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="lastName">Кулан</label>
+                    <input type="text" class="form-control" placeholder="Количество, нап 12" id="qulan" name="qulan">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="lastName">Саджа</label>
+                    <input type="text" class="form-control" placeholder="Количество, нап 12" id="sadja" name="sadja">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="lastName">Сокол</label>
+                    <input type="text" class="form-control" placeholder="Количество, нап 12" id="falcon" name="falcon">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="lastName">Большой подорлик</label>
+                    <input type="text" class="form-control" placeholder="Количество, нап 12" id="podorlik" name="podorlik">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="lastName">Балобан</label>
+                    <input type="text" class="form-control" placeholder="Количество, нап 12" id="falcon_baloban" name="falcon_baloban">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="lastName">Рыба осетр</label>
+                    <input type="text" class="form-control" placeholder="Количество, нап 12" id="sturgeon" name="sturgeon">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="lastName">Барсук</label>
+                    <input type="text" class="form-control" placeholder="Количество, нап 12" id="badger" name="badger">
+                </div>
+
+                <hr class="mb-4">
+                <div class="row d-flex justify-content-between">
+                    <button type="button" class="btn btn-info btn-lg" onclick="window.history.back()">Назад</button>
+                    <a href="{% url 'add_crime_item' %}"><button class="btn btn-success btn-lg" type="submit">Добавить</button></a>
+                </div>
+                
+              </form>
+            </div>
+          </div>
+    </div>
+{% endblock %}

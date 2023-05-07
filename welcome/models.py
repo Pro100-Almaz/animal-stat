@@ -30,12 +30,24 @@ class TakenItems(models.Model):
     sturgeon = models.IntegerField()
     badger = models.IntegerField()
 
-class Location(models.Model):
-    city = models.CharField(max_length=50)
-    region = models.CharField(max_length=500)
-
-class Animal(models.Model):
+class AnimalName(models.Model):
     name = models.CharField(max_length=50)
-    number = models.IntegerField()
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+class Location(models.Model):
+    region = models.CharField(max_length=500)
+    name = models.ForeignKey(AnimalName, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.name) + " " + str(self.region)  
+
+class AnimalData(models.Model):
+    number = models.IntegerField(blank=True, null=True)
+    year = models.IntegerField()
+    animal = models.ForeignKey(Location, on_delete=models.CASCADE)
+
+
+
 

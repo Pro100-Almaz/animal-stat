@@ -1,28 +1,10 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <title>Document</title>
-</head>
-<body>
-    <div class="navbar navbar-dark bg-dark box-shadow">
-        <div class="container d-flex justify-content-between">
-            <a href="{% url 'welcome' %}" class="navbar-brand d-flex align-items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-            <strong>Album</strong>
-            </a>
-        </div>
-    </div>
+{% extends 'navigation.html' %}
+{% block content %}
     <main role="main" class="col-md-9 m-auto col-lg-10 pt-3 px-4 justify-content-center">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
           <h1 class="h2">Таблица</h1>
           <div class="btn-toolbar mb-2 mb-md-0">
-            <a href="{% url 'add_crime' %}">
+            <a href="{% url 'add_crime_item' %}">
                 <button class="btn btn-sm btn-outline-secondary">
                 Добавить данные
                 </button>
@@ -32,53 +14,104 @@
 
 
         <h2>Изъятые дериваты</h2>
-        <div class="table-responsive">
-          <table class="table table-striped table-sm">
-            <thead>
-              <tr>
-                <th>Год</th>
-                <th>Самец с рогами</th>
-                <th>Самец с отпилиными рогами</th>
-                <th>Самка</th>
-                <th>Рога</th>
-                <th>Сеголеток</th>
-                <th>Архар</th>
-                <th>Джейран</th>
-                <th>Дрофа</th>
-                <th>Кулан</th>
-                <th>Саджа</th>
-                <th>Сокол</th>
-                <th>Большой подорлик</th>
-                <th>Балобан</th>
-                <th>Рыба осетр</th>
-                <th>Барсук</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for record in records %}
+        <form method="post">
+          {% csrf_token %}
+          <div class="table-responsive">
+            <table class="table table-striped table-sm">
+              <thead>
                 <tr>
-                  <td class="bg-primary text-white">{{ record.year }}</td>
-                  <td class="bg-warning text-dark">{{ record.saiga_without_horns }}</td>
-                  <td class="bg-warning text-dark">{{ record.saiga_with_horns }}</td>
-                  <td class="bg-warning text-dark">{{ record.saiga_female }}</td>
-                  <td class="bg-warning text-dark">{{ record.horns }}</td>
-                  <td class="bg-warning text-dark">{{ record.segoltok }}</td>
-                  <td>{{ record.arhar }}</td>
-                  <td>{{ record.jeiran }}</td>
-                  <td>{{ record.drofa }}</td>
-                  <td>{{ record.qulan }}</td>
-                  <td>{{ record.sadja }}</td>
-                  <td>{{ record.falcon }}</td>
-                  <td>{{ record.podorlik }}</td>
-                  <td>{{ record.falcon_baloban }}</td>
-                  <td>{{ record.sturgeon }}</td>
-                  <td>{{ record.badger }}</td>
+                  <th>#</th>
+                  <th>Год</th>
+                  <th>Самец с рогами</th>
+                  <th>Самец с отпилиными рогами</th>
+                  <th>Самка</th>
+                  <th>Рога</th>
+                  <th>Сеголеток</th>
+                  <th>Архар</th>
+                  <th>Джейран</th>
+                  <th>Дрофа</th>
+                  <th>Кулан</th>
+                  <th>Саджа</th>
+                  <th>Сокол</th>
+                  <th>Большой подорлик</th>
+                  <th>Балобан</th>
+                  <th>Рыба осетр</th>
+                  <th>Барсук</th>
                 </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-
+              </thead>
+              <tbody>
+                {% for record in records %}
+                  <tr>
+                    <td><input type="checkbox" name="data" value="{{ record.id }}"></td>
+                    <td class="bg-primary text-white">{{ record.year }}</td>
+                    <td class="bg-warning text-dark">{{ record.saiga_without_horns }}</td>
+                    <td class="bg-warning text-dark">{{ record.saiga_with_horns }}</td>
+                    <td class="bg-warning text-dark">{{ record.saiga_female }}</td>
+                    <td class="bg-warning text-dark">{{ record.horns }}</td>
+                    <td class="bg-warning text-dark">{{ record.segoltok }}</td>
+                    <td>{{ record.arhar }}</td>
+                    <td>{{ record.jeiran }}</td>
+                    <td>{{ record.drofa }}</td>
+                    <td>{{ record.qulan }}</td>
+                    <td>{{ record.sadja }}</td>
+                    <td>{{ record.falcon }}</td>
+                    <td>{{ record.podorlik }}</td>
+                    <td>{{ record.falcon_baloban }}</td>
+                    <td>{{ record.sturgeon }}</td>
+                    <td>{{ record.badger }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <button type="submit" class="btn btn-primary">Сравнить</button>
+        </form>
+        {% if percentage %}
+          Разница между {{ percentage.first_val }} годом и {{ percentage.second_val }} годом.
+          <div class="table-responsive">
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>Самец с рогами</th>
+                  <th>Самец с отпилиными рогами</th>
+                  <th>Самка</th>
+                  <th>Рога</th>
+                  <th>Сеголеток</th>
+                  <th>Архар</th>
+                  <th>Джейран</th>
+                  <th>Дрофа</th>
+                  <th>Кулан</th>
+                  <th>Саджа</th>
+                  <th>Сокол</th>
+                  <th>Большой подорлик</th>
+                  <th>Балобан</th>
+                  <th>Рыба осетр</th>
+                  <th>Барсук</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{ percentage.saiga_without_horns }}%</td>
+                  <td>{{ percentage.saiga_with_horns }}%</td>
+                  <td>{{ percentage.saiga_female }}%</td>
+                  <td>{{ percentage.horns }}%</td>
+                  <td>{{ percentage.segoltok }}%</td>
+                  <td>{{ percentage.arhar }}%</td>
+                  <td>{{ percentage.jeiran }}%</td>
+                  <td>{{ percentage.drofa }}%</td>
+                  <td>{{ percentage.qulan }}%</td>
+                  <td>{{ percentage.sadja }}%</td>
+                  <td>{{ percentage.falcon }}%</td>
+                  <td>{{ percentage.podorlik }}%</td>
+                  <td>{{ percentage.falcon_baloban }}%</td>
+                  <td>{{ percentage.sturgeon }}%</td>
+                  <td>{{ percentage.badger }}%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        {% else %}
+          *Выделите два года для сравнения изменений 
+        {% endif %}
       </main>
-</body>
-</html>
+{% endblock %}
