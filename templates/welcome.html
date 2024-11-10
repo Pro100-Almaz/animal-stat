@@ -1,14 +1,33 @@
 {% extends 'navigation.html' %}
 {% block content %}
-    <main role="main" class="m-auto pt-3 px-4 d-flex justify-content-center">
-        <div class="container">
-            <div class="col-md-4 m-auto pt-5">
-              <div class="card mb-4 box-shadow">
-                <a href="{% url 'index' %}" class="btn" style="height: 225px; max-width: 100%; display: block; padding-top: 25%;">Информация по учету и мониторингу</a>
-              </div>
+    <main role="main" class="container pt-3 px-4">
+        <!-- Main Section -->
+        <section class="main-section mx-auto my-5 p-5 rounded shadow-sm text-center">
+            <h2>Сведения</h2>
+            <p>
+                Республиканское государственное казенное предприятие «ПО Охотзоопром» комитета лесного хозяйства и животного мира министерства экологии и природных ресурсов Республики Казахстан
+            </p>
+            <p>
+                <strong>Адрес:</strong> Казахстан, 050028, Алматы г., Турксибский р-н., ул.Василия Бартольда, д.157Б
+            </p>
+            <p>
+                <strong>Контакты:</strong> тел: (727)383-95-09 e-mail: ohozoo@mail.ru
+            </p>
+            <button class="btn btn-primary mt-3">Информация по учету</button>
+            <div class="mt-4">
+                <img src="https://via.placeholder.com/500x300" alt="Animals" class="img-fluid rounded">
             </div>
-        </div>
-
-        
+        </section>
+    
+        <!-- Footer -->
+        <footer class="footer bg-success text-white text-center py-4">
+            <p class="mb-0">
+                Многие из видов животных находятся на грани вымирания — печальная, но далеко не новая информация. Каждый цивилизованный человек регулярно с ней сталкивается. Но что он при этом испытывает? Чаще всего лишь легкие переживания по поводу того, что в скором времени милые пушистые зверьки или красивые грозные хищники останутся только на промофотографиях да в виде чучел в музеях. И практически никто не задумывается о настоящей опасности вымирания видов.
+            </p>
+        </footer>
+    
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     </main>
 {% endblock %}
