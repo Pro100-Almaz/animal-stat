@@ -189,7 +189,18 @@ def animal_list(request):
 def animal_view(request, name):
     animal_name = AnimalName.objects.get(name = name)
     location_of_animal = Location.objects.filter(name__name=animal_name)
-    records = AnimalData.objects.filter(animal__in=location_of_animal)
+    records = AnimalData.objects.filter(animal__in=location_of_animal).order_by('year')
+
+    years = []
+
+    for record in records:
+        if record.year not in years:
+            years.append(record.year)
+
+    data_by_year = {year: [] for year in years}
+
+    for record in records:
+        data_by_year[record.year].append(record.number)
 
     if request.method == 'POST':
         data = request.POST.getlist('data')
@@ -213,7 +224,7 @@ def animal_view(request, name):
                     first_year_total = record.number
                 else:
                     percentage['number'] = 0
-                    return render(request, 'animal.html', {'percentage': percentage, 'records': records, 'name': name})
+                    return render(request, 'animal.html', {'locations': location_of_animal, 'percentage': percentage, 'records': records, 'name': name, 'data_by_year': data_by_year})
                   
                 break
 
@@ -226,9 +237,9 @@ def animal_view(request, name):
 
                 percentage['number'] = round(difference_in_total / first_year_total * 100, 3)
 
-                return render(request, 'animal.html', {'percentage': percentage, 'records': records, 'name': name})
+                return render(request, 'animal.html', {'locations': location_of_animal, 'percentage': percentage, 'records': records, 'name': name, 'data_by_year': data_by_year})
 
-    return render(request, 'animal.html', {'records': records, 'name': name})
+    return render(request, 'animal.html', {'locations': location_of_animal, 'records': records, 'name': name, 'data_by_year': data_by_year})
 
 def add_animal(request, name):
     animal_name = AnimalName.objects.get(name = name)
